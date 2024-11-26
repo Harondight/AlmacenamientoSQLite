@@ -1,0 +1,2 @@
+# AlmacenamientoSQLite
+ Administrador de tares
