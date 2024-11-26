@@ -2,14 +2,18 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path'); // Asegúrate de importar 'path'
 
 const app = express();
 
-// Middleware
+// Middleware para manejar solicitudes JSON y CORS
 app.use(bodyParser.json());
 app.use(cors());
 
-// Conexión a SQLite
+// Sirve archivos estáticos desde la carpeta 'public'
+app.use(express.static(path.join(__dirname, 'public'))); // Asegúrate de que los archivos estén en 'public'
+
+// Conexión a la base de datos SQLite
 const db = new sqlite3.Database('./tareas.db', (err) => {
     if (err) {
         console.error('Error al abrir la base de datos:', err.message);
@@ -18,14 +22,14 @@ const db = new sqlite3.Database('./tareas.db', (err) => {
     }
 });
 
-// Crear tabla de tareas
+// Crear tabla de tareas si no existe
 db.run(`CREATE TABLE IF NOT EXISTS tareas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     descripcion TEXT NOT NULL,
     completada INTEGER DEFAULT 0
 )`);
 
-// Rutas
+// Rutas API para manejar las tareas
 app.post('/tareas', (req, res) => {
     const { descripcion } = req.body;
     const query = `INSERT INTO tareas (descripcion) VALUES (?)`;
