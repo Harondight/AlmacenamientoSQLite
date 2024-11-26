@@ -4,8 +4,9 @@
  # Proyecto de Gestión de Tareas
 
 ## Requisitos
-- Node.js instalado
-- SQLite instalado
+- Node.js instalado: https://nodejs.org/en
+- Si tienes problemas con node ejecuta este comando: npm install express sqlite3 body-parser cors
+- SQLite instalado: https://www.sqlite.org/
 
 ## Configuración
 1. Clona este repositorio.
@@ -13,4 +14,4 @@
     cd server npm install
 3. Inicia el servidor:
     node server.js
-4. Abre `index.html` en tu navegador para interactuar con la aplicación.
+4. Abre la siguiente pagina en tu navegador:  'http://localhost:3000'
